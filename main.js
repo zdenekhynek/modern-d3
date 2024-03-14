@@ -1,10 +1,7 @@
 import "./style.css";
 
-import * as d3 from "d3";
+// import join from "./src/02_join";
+// join();
 
-d3.selectAll("circle")
-  .style("fill", "orange")
-  .attr("r", function() {
-    return Math.random() * 25;
-  });
-
+import scales from "./src/03_scales";
+scales();
