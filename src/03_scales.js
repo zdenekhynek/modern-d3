@@ -22,10 +22,13 @@ export default function scales() {
       return d[yKey] || 0;
     });
 
+    //  create scales where the first parameter is an array with a minimum and maximum values
+    //  from the dataset (input domain - e.g. what goes in) and the second parameter
+    //  is an array with size of the svg (output range - e.g. what comes out)
     var xScale = d3.scaleLinear(xMinMax, [0, 760]);
     var yScale = d3.scaleLinear(yMinMax, [0, 640]);
 
-    //  @TODO: create a d3.scaleSqrt to set the radius of the circle on line 40
+    //  @TODO: create a d3.scaleSqrt to set the radius of the circle on line 42
 
     circleUpdate.attr("cx", function (d, i) {
       return xScale(d[xKey] || 0);
