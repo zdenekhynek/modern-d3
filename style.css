@@ -1,3 +1,8 @@
 .red {
   fill: red;
 }
+
+.tick line,
+.domain {
+  stroke: #ddd;
+}

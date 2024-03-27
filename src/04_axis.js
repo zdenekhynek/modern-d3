@@ -23,20 +23,28 @@ export default function scales() {
     var xKey = "2022_pop";
     var yKey = "2022_gdp_pc";
     var rKey = "2022_pop";
+    var colorKey = "Region";
 
     //  get minimum and maximum values of each cvs column in the dataset
     var xMinMax = d3.extent(data, function (d) {
       return d[xKey] || 0;
     });
+    console.log("minmax", xMinMax);
     var yMinMax = d3.extent(data, function (d) {
-      return d[yKey] || 0;
+      return +d[yKey] || 0;
     });
+
+    var regions = data.map(function (d) {
+      return d[colorKey];
+    });
+    var uniqueRegions = [...new Set(regions)];
 
     //  create scales where the first parameter is an array with a minimum and maximum values
     //  from the dataset (input domain - e.g. what goes in) and the second parameter
     //  is an array with size of the svg (output range - e.g. what comes out)
     var xScale = d3.scaleLinear(xMinMax, [0, chartWidth]);
     var yScale = d3.scaleLinear(yMinMax, [chartHeight, 0]);
+    var colorScale = d3.scaleOrdinal(uniqueRegions, d3.schemeTableau10);
 
     //  @TODO: create a d3.scaleSqrt to set the radius of the circle on line 42
 
@@ -50,6 +58,10 @@ export default function scales() {
 
     circleUpdate.attr("r", function (d, i) {
       return Math.sqrt(d[rKey] / 100000);
+    });
+
+    circleUpdate.style("fill", function (d, i) {
+      return colorScale(d[colorKey]);
     });
 
     svg
