@@ -6,5 +6,5 @@ import "./style.css";
 // import scales from "./src/03_scales";
 // scales();
 
-import axis from "./src/04_axis";
-axis();
+import beeswarm from "./src/05_beeswarm";
+beeswarm();
